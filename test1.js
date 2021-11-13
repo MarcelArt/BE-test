@@ -68,20 +68,28 @@ function result(sessions) {
   let newSession1 = { session_id: 1, classess: [] };
   session1.forEach(s1 => {
     newSession1.classess.push(s1.class);
+    newSession1.classess.forEach(c => {
+      c.students = [];
+      c.students.push(s1.student);
+    })
   });
 
   newSession1.classess.splice(2, 2);
   
   let session2 = sessions.filter(S => S.session_id === 2);
   let newSession2 = { session_id: 2, classess: [] };
-  session1.forEach(s2 => {
+  session2.forEach(s2 => {
     newSession2.classess.push(s2.class);
+    newSession1.classess.forEach(c => {
+      c.students = [];
+      c.students.push(s2.student);
+    })
   });
 
   newSession2.classess.splice(2, 2);
   
 
-  return [newSession1, newSession2];
+  return JSON.stringify([newSession1, newSession2]);
 }
 
 console.log(result(sessions));
